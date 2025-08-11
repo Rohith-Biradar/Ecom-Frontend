@@ -22,7 +22,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
 
   const fetchData = async (value) => {
     try {
-      const response = await axios.get("${process.env.REACT_APP_API_URL}/api/products");
+      const response = await axios.get("import.meta.env.VITE_API_URL/api/products");
       setSearchResults(response.data);
       console.log(response.data);
     } catch (error) {

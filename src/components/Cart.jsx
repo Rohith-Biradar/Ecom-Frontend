@@ -18,7 +18,7 @@ const Cart = () => {
     const fetchImagesAndUpdateCart = async () => {
       console.log("Cart", cart);
       try {
-        const response = await axios.get("${process.env.REACT_APP_API_URL}/api/products");
+        const response = await axios.get("import.meta.env.VITE_API_URL/api/products");
         const backendProductIds = response.data.map((product) => product.id);
 
         const updatedCartItems = cart.filter((item) => backendProductIds.includes(item.id));
@@ -26,7 +26,7 @@ const Cart = () => {
           updatedCartItems.map(async (item) => {
             try {
               const response = await axios.get(
-                `${process.env.REACT_APP_API_URL}/api/product/${item.id}/image`,
+                `import.meta.env.VITE_API_URL/api/product/${item.id}/image`,
                 { responseType: "blob" }
               );
               const imageFile = await converUrlToFile(response.data, response.data.imageName);
@@ -103,6 +103,7 @@ const Cart = () => {
         const updatedProductData = { ...rest, stockQuantity: updatedStockQuantity };
         console.log("updated product data", updatedProductData)
   
+      
         const cartProduct = new FormData();
         cartProduct.append("imageFile", cartImage);
         cartProduct.append(
@@ -111,7 +112,7 @@ const Cart = () => {
         );
   
         await axios
-          .put(`${process.env.REACT_APP_API_URL}/${item.id}`, cartProduct, {
+          .put(`import.meta.env.VITE_API_URL/${item.id}`, cartProduct, {
             headers: {
               "Content-Type": "multipart/form-data",
             },
