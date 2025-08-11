@@ -28,7 +28,7 @@ const UpdateProduct = () => {
         setProduct(response.data);
       
         const responseImage = await axios.get(
-          `import.meta.env.VITE_API_URL/api/product/${id}/image`,
+          `${import.meta.env.VITE_API_URL}/api/product/${id}/image`,
           { responseType: "blob" }
         );
        const imageFile = await converUrlToFile(responseImage.data,response.data.imageName)
